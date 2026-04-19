@@ -8,7 +8,8 @@ namespace sqlapp.Services
     public class ProductService
     {
         private static string db_source = "sqlserver1254.database.windows.net";
-        private static string db_user = "sqladmin";
+        //private static string db_user = "sqladmin";
+        private static string db_user = "sqladmin@sqlserver1254";  // 🔥 FIXED
         private static string db_password = "Mu@8034569789";
         private static string db_database = "sqldb";
 
@@ -20,6 +21,10 @@ namespace sqlapp.Services
             _builder.UserID = db_user;
             _builder.Password = db_password;
             _builder.InitialCatalog = db_database;
+
+            _builder.Encrypt = true;                 // 🔐 Required for Azure
+            _builder.TrustServerCertificate = false; // 🔐 Required
+
             return new SqlConnection(_builder.ConnectionString);
         }
         public List<Product> GetProducts()
