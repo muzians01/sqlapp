@@ -10,7 +10,7 @@ namespace sqlapp.Services
         private static string db_source = "sqlserver1254.database.windows.net";
         //private static string db_user = "sqladmin";
         private static string db_user = "sqladmin@sqlserver1254";  // 🔥 FIXED
-        private static string db_password = "Mu@8034569789";
+        private static string db_password = "Mu@803456789";
         private static string db_database = "sqldb";
 
         private SqlConnection GetConnection()
@@ -32,7 +32,9 @@ namespace sqlapp.Services
             List<Product> _product_lst = new List<Product>();
             string _statement = "SELECT ProductID,ProductName,Quantity from Products";
             SqlConnection _connection = GetConnection();
-            
+
+            Console.WriteLine(_connection.ConnectionString);
+
             _connection.Open();
             
             SqlCommand _sqlcommand = new SqlCommand(_statement, _connection);
